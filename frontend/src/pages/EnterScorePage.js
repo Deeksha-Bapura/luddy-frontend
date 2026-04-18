@@ -20,10 +20,34 @@ function EnterScorePage() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Score submitted successfully!");
-    navigate("/dashboard");
+
+    try {
+      const response = await fetch("http://localhost:5000/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          teamName: formData.teamName,
+          judgeId: formData.judgeId,
+          innovation: Number(formData.innovation),
+          technical: Number(formData.technical),
+          presentation: Number(formData.presentation),
+          impact: Number(formData.impact),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Score submitted successfully!");
+        navigate("/dashboard");
+      } else {
+        alert(data.error || "Submission failed");
+      }
+    } catch (err) {
+      alert("Could not connect to server. Is the backend running?");
+    }
   };
 
   return (
