@@ -17,28 +17,34 @@ function LoginPage({ setRole }) {
     }
   };
 
-  return (
-    <div className="login-page">
-      <div className="login-card">
-        <h2>Judge Login</h2>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
+return (
+  <div className="landing-page">
+    <div className="landing-overlay"></div>
+
+    <div className="landing-card login-match-card">
+      <h1>Judge Login</h1>
+      <p>Log in to enter hackathon scores</p>
+
+      <div className="login-form">
+        <input
+  type="text"
+  placeholder="Username"
+  value={username}
+  onChange={(e) => setUsername(e.target.value)}
+/>
+
+<input
+  type="password"
+  placeholder="Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+
+<button onClick={handleLogin}>Login</button>
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default LoginPage;
