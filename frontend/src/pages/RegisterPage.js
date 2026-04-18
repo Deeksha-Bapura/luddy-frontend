@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-function LoginPage({ setRole }) {
+function RegisterPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [adminSecret, setAdminSecret] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, adminSecret }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        setRole(data.role);
-        navigate("/dashboard");
+        alert("Registration successful! Please log in.");
+        navigate("/login");
       } else {
-        alert(data.message || "Invalid credentials");
+        alert(data.message || "Registration failed");
       }
     } catch (err) {
       alert("Could not connect to server. Is the backend running?");
@@ -32,8 +33,8 @@ function LoginPage({ setRole }) {
   return (
     <div className="login-page">
       <div className="login-card">
-        <h2>Judge Login</h2>
-        <form onSubmit={handleLogin}>
+        <h2>Judge Sign Up</h2>
+        <form onSubmit={handleRegister}>
           <input
             type="text"
             placeholder="Username"
@@ -46,12 +47,18 @@ function LoginPage({ setRole }) {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <input
+            type="password"
+            placeholder="Admin Secret Code"
+            value={adminSecret}
+            onChange={(e) => setAdminSecret(e.target.value)}
+          />
+        <button type="submit">Sign Up</button>
         </form>
-        <p>Don't have an account? <Link to="/register">Sign up here</Link></p>
+        <p>Already have an account? <Link to="/login">Log in here</Link></p>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

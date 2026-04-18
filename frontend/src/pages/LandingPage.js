@@ -10,7 +10,7 @@ function LandingPage({ setRole }) {
   };
 
   const handleJudge = () => {
-    navigate("/login");
+    navigate("/register");
   };
 
   return (
