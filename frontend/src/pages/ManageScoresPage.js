@@ -14,7 +14,7 @@ function ManageScoresPage() {
   const navigate = useNavigate();
 
   const fetchSubmissions = () => {
-    fetch("http://localhost:5000/submissions")
+    fetch("https://luddy-backend.onrender.com/submissions")
       .then((res) => res.json())
       .then((data) => {
         setSubmissions(data);
@@ -34,7 +34,7 @@ function ManageScoresPage() {
     if (!window.confirm("Are you sure you want to delete this submission?")) return;
 
     try {
-      const response = await fetch(`http://localhost:5000/delete/${id}`, {
+      const response = await fetch(`https://luddy-backend.onrender.com/delete/${id}`, {
         method: "DELETE",
       });
 
@@ -67,7 +67,7 @@ function ManageScoresPage() {
 
   const handleUpdate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/update/${id}`, {
+      const response = await fetch(`https://luddy-backend.onrender.com/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

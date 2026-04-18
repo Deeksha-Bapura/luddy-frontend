@@ -6,7 +6,7 @@ function DashboardPage({ role }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/dashboard")
+    fetch("https://luddy-backend.onrender.com/dashboard")
       .then((res) => res.json())
       .then((data) => {
         setDashboardData(data);
